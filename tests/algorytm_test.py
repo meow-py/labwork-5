@@ -42,7 +42,12 @@ def test_check():
             assert check(value1, value2, lambda x: x) == (value1 < value2)
 
 
+def cow_solver(k, n):
+    def f(i):
+        return ((i + 1) * k) < n - 1
+
+    return binary_search(f, -1, n)
+
+
 def test_cows():
-    arr = [0, 10, 15, 25, 100]
-    for (k, ans) in [(2, 100), (3, 25), (4, 10), (5, 5)]:
-        assert (arr, )
+    assert cow_solver(3, 11) == 3
