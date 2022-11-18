@@ -27,10 +27,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install/Upgrade pip and poetry
-        run: python -m pip install --upgrade pip poetry
+        run: python -m pip install --upgrade pip pytest
 
       - name: Install dependencies
-        run: poetry install
-
-      - name: Run pytest
-        run: poetry run pytest
+        run: PYTHONPATH=src pytest tests
