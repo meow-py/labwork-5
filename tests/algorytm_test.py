@@ -1,3 +1,5 @@
+import math
+
 from main import *
 
 
@@ -51,3 +53,10 @@ def cow_solver(k, n):
 
 def test_cows():
     assert cow_solver(3, 11) == 3
+
+
+def test_poor_sqrt():
+    for n in range(42, 228, 13):
+        def f(i):
+            return (i / 100) ** 2 < n
+        assert abs(binary_search(f, 0, n*100) / 100 - math.sqrt(n)) < 0.01
