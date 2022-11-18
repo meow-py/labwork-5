@@ -27,13 +27,3 @@ def binary_search(
             right = middle
 
     return right
-
-
-def main():
-    for i in range(0, 10):
-        arr = [i for i in range(0, 9)]
-        print(arr, i, binary_search(arr, i))
-
-
-if __name__ == '__main__':
-    main()
