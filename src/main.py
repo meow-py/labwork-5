@@ -1,7 +1,5 @@
 from typing import TypeVar, Optional, Callable, Sequence
 
-T = TypeVar("T")
-
 
 def find_middle(left: int, right: int):
     return (left + right) // 2
@@ -35,7 +33,7 @@ def binary_search(
 
 
 def array_binary_search(
-        arr: Sequence[T],
+        arr: Sequence,
         need_value: int,
         *,
         key: Callable = (lambda _: _),
