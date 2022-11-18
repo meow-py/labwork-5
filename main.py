@@ -1,29 +1,38 @@
-def standardCMP(current_value):
-    return current_value
+from typing import TypeVar, Optional, Callable, Sequence
+
+T = TypeVar("T")
 
 
-def binarySearch(arr: list, need_value, cmp=standardCMP, left=None, right=None):
+def binary_search(
+        arr: Sequence[T],
+        need_value: int,
+        *,
+        key: Callable = (lambda _: _),
+        left: Optional[int] = None,
+        right: Optional[int] = None
+) -> int:
     if left is None:
         left = -1
     if right is None:
         right = len(arr)
 
     if left > right:
-        return False
+        raise ValueError()
 
     while right - left > 1:
         middle = (left + right) // 2
-        if cmp(arr[middle]) > cmp(need_value):
-            right = middle
-        else:
+        if key(arr[middle]) < key(need_value):
             left = middle
-    return right if right < len(arr) and cmp(arr[right]) == cmp(need_value) else (left if left >= 0 and cmp(arr[left]) == cmp(need_value) else -1)
+        else:
+            right = middle
+
+    return right
 
 
 def main():
     for i in range(0, 10):
-        arr = [i for i in range(1, 9)]
-        print(arr, i, binarySearch(arr, i))
+        arr = [i for i in range(0, 9)]
+        print(arr, i, binary_search(arr, i))
 
 
 if __name__ == '__main__':
