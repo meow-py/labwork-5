@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'tests/**'
-      - 'main.py'
+      - 'src/**'
       - '.github/workflows/ci.yml'
       - 'pyproject.toml'
 
