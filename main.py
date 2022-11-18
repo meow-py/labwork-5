@@ -16,6 +16,25 @@ def check(value1, value2, key):
 
 
 def binary_search(
+        func: Callable,
+        left: int,
+        right: int,
+) -> int:
+
+    if left > right:
+        raise ValueError()
+
+    while check_near(left, right):
+        middle = find_middle(left, right)
+        if func(middle):
+            left = middle
+        else:
+            right = middle
+
+    return right
+
+
+def array_binary_search(
         arr: Sequence[T],
         need_value: int,
         *,
@@ -28,14 +47,7 @@ def binary_search(
     if right is None:
         right = len(arr)
 
-    if left > right:
-        raise ValueError()
+    def array_search(i):
+        return check(arr[i], need_value, key)
 
-    while check_near(left, right):
-        middle = find_middle(left, right)
-        if check(arr[middle], need_value, key):
-            left = middle
-        else:
-            right = middle
-
-    return right
+    return binary_search(array_search, left, right)
