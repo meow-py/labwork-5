@@ -3,6 +3,18 @@ from typing import TypeVar, Optional, Callable, Sequence
 T = TypeVar("T")
 
 
+def find_middle(left: int, right: int):
+    return (left + right) // 2
+
+
+def check_near(left: int, right: int):
+    return right - left > 1
+
+
+def check(value1, value2, key):
+    return key(value1) < key(value2)
+
+
 def binary_search(
         arr: Sequence[T],
         need_value: int,
@@ -19,9 +31,9 @@ def binary_search(
     if left > right:
         raise ValueError()
 
-    while right - left > 1:
-        middle = (left + right) // 2
-        if key(arr[middle]) < key(need_value):
+    while check_near(left, right):
+        middle = find_middle(left, right)
+        if check(arr[middle], need_value, key):
             left = middle
         else:
             right = middle
